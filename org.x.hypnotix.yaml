@@ -23,8 +23,10 @@ modules:
   - name: hypnotix
     buildsystem: simple
     build-commands:
+      - tar -tf packages.tar.gz
+      - bsdtar -tf packages/hypnotix_4.3_all.deb
       - |
-        bsdtar -Oxf hypnotix_4.3_all.deb 'data.tar.xz' |
+        bsdtar -Oxf packages/hypnotix_4.3_all.deb 'data.tar.xz' |
           bsdtar -xf - \
             --exclude='./usr/share/doc'
       - find usr -type f -name '*.py' -exec sed -i 's@/usr/share@/app/hypnotix/share@g' {} +
