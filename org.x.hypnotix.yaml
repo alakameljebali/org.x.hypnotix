@@ -23,10 +23,8 @@ modules:
   - name: hypnotix
     buildsystem: simple
     build-commands:
-      - tar -tf packages.tar.gz
-      - bsdtar -tf packages/hypnotix_4.3_all.deb
       - |
-        bsdtar -Oxf packages/hypnotix_4.3_all.deb 'data.tar.xz' |
+        bsdtar -Oxf hypnotix_4.3_all.deb 'data.tar.xz' |
           bsdtar -xf - \
             --exclude='./usr/share/doc'
       - find usr -type f -name '*.py' -exec sed -i 's@/usr/share@/app/hypnotix/share@g' {} +
@@ -46,7 +44,7 @@ modules:
       - install -D GPL -t "${FLATPAK_DEST}/hypnotix/share/common-licenses/"
     sources:
       - type: archive
-        url: https://github.com/linuxmint/hypnotix/releases/download/master.lmde6/packages.tar.gz
+        url: http://packages.linuxmint.com/pool/main/h/hypnotix/hypnotix_4.3_all.deb
         sha256: b55d3b247597c0668c3cb71ee9eacc69a8788aecd5c171e311716d075463c0cf
         only-arches:
           - x86_64
