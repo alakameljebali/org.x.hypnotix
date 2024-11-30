@@ -23,22 +23,18 @@ modules:
   - name: hypnotix
     buildsystem: simple
     build-commands:
-      - |
-        ar x hypnotix_4.3_all.deb data.tar.xz |
-          bsdtar -xf - \
-            --exclude='./usr/share/doc'
-      - find usr -type f -name '*.py' -exec sed -i 's@/usr/share@/app/hypnotix/share@g' {} +
-      - find usr -type f -name 'hypnotix.py' -exec sed -i 's@/usr/share@/app/hypnotix/share@g' {} +
-      - sed -i 's/dlg.set_logo_icon_name("hypnotix")/dlg.set_logo_icon_name("org.x.hypnotix")/' usr/lib/hypnotix/hypnotix.py
-      - mkdir -p ${FLATPAK_DEST}/hypnotix
-      - cp -r usr/* ${FLATPAK_DEST}/hypnotix
-      - bsdtar -xf master.zip --strip-components=3 -C ${FLATPAK_DEST}/hypnotix/share circle-flags-master/usr/share/circle-flags-svg
-      - install -Dm0644 "usr/share/icons/hicolor/scalable/apps/hypnotix.svg" "${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/hypnotix.svg"
-      - install -Dm0644 "usr/share/applications/hypnotix.desktop" "${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop"
-      - glib-compile-schemas "${FLATPAK_DEST}/hypnotix/share/glib-2.0/schemas"
-      - mkdir -p ${FLATPAK_DEST}/share/glib-2.0/schemas
-      - cp -f ${FLATPAK_DEST}/hypnotix/share/glib-2.0/schemas/* ${FLATPAK_DEST}/share/glib-2.0/schemas
-      - install -Dm 755 hypnotix "${FLATPAK_DEST}/bin/hypnotix"
+  - ar x hypnotix_4.3_all.deb
+  - find usr -type f -name '*.py' -exec sed -i 's@/usr/share@/app/hypnotix/share@g' {} +
+  - find usr -type f -name 'hypnotix.py' -exec sed -i 's@/usr/share@/app/hypnotix/share@g' {} +
+  - sed -i 's/dlg.set_logo_icon_name("hypnotix")/dlg.set_logo_icon_name("org.x.hypnotix")/' usr/lib/hypnotix/hypnotix.py
+  - mkdir -p ${FLATPAK_DEST}/hypnotix
+  - cp -r usr/* ${FLATPAK_DEST}/hypnotix
+  - install -Dm0644 "usr/share/icons/hicolor/scalable/apps/hypnotix.svg" "${FLATPAK_DEST}/share/icons/hicolor/scalable/apps/hypnotix.svg"
+  - install -Dm0644 "usr/share/applications/hypnotix.desktop" "${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop"
+  - glib-compile-schemas "${FLATPAK_DEST}/hypnotix/share/glib-2.0/schemas"
+  - mkdir -p ${FLATPAK_DEST}/share/glib-2.0/schemas
+  - cp -f ${FLATPAK_DEST}/hypnotix/share/glib-2.0/schemas/* ${FLATPAK_DEST}/share/glib-2.0/schemas
+  - install -Dm 755 hypnotix "${FLATPAK_DEST}/bin/hypnotix"
     post-install:
       - install -D ${FLATPAK_ID}.metainfo.xml -t "${FLATPAK_DEST}/share/metainfo/"
       - install -D GPL -t "${FLATPAK_DEST}/hypnotix/share/common-licenses/"
