@@ -45,7 +45,7 @@ modules:
     sources:
       - type: archive
         url: http://packages.linuxmint.com/pool/main/h/hypnotix/hypnotix_4.3_all.deb
-        sha256: b55d3b247597c0668c3cb71ee9eacc69a8788aecd5c171e311716d075463c0cf
+        sha256: 129f9fd5032252cebbd81a6ea8da4f61dc6bd4d9072dede430bfca8e67451361
         only-arches:
           - x86_64
       - type: file
